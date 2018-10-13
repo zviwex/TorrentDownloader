@@ -52,6 +52,6 @@ def main():
     if sys.argv[1][0] == "m":
         download_movie(sys.argv[2])
     else:
-        download_episode(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
+        download_episode(sys.argv[2].strip(), int(sys.argv[3]), int(sys.argv[4]))
 
 main()
