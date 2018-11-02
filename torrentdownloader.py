@@ -49,6 +49,8 @@ def main():
         print "Usage:"
         print "{} m <movie name> - for movies"
         print "{} e <tvshow name> <series number> <episode number> - for episodes"
+        return
+
     if sys.argv[1][0] == "m":
         download_movie(sys.argv[2])
     else:
