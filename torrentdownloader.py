@@ -45,7 +45,7 @@ def download_series(series):
 
 
 def main():
-    if len(sys.argv) != 5:
+    if len(sys.argv) < 3:
         print "Usage:"
         print "{} m <movie name> - for movies"
         print "{} e <tvshow name> <series number> <episode number> - for episodes"

@@ -73,16 +73,26 @@ class Povies(object):
         - Requires a movie_id
         """
         url = "https://yts.ag/api/v2/movie_details.json?movie_id=%s" % movie_id
+        print(url)
         res = requests.get(url)
         dic = res.json()
-        torrent_url = dic['data']['movie']['torrents'][0]['url']
         torrent_title = dic['data']['movie']['title_english']
+        torrent_title = torrent_title.replace(":", "") 
+        
+        torrents = dic['data']['movie']['torrents']
+        
+        for torrent in torrents:
+            if torrent["quality"] == "720p":
+                torrent_url = torrent['url']
+                
         r = requests.get(torrent_url)
+        print(torrent_title)
         with open(torrent_title+'.torrent', 'wb') as code:
             code.write(r.content)
         if sys.platform == 'linux2':
             subprocess.call(['xdg-open', torrent_title+'.torrent'])
         if sys.platform == 'win32':
+            print("Downloading {}".format(torrent_title+'.torrent' ))
             os.startfile(torrent_title+'.torrent')
         if sys.platform == 'darwin':
             os.system('open ' + torrent_title+'.torrent')
